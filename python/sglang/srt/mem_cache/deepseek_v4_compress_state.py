@@ -48,6 +48,8 @@ class CompressStatePool:
     ):
         self.ring_size = ring_size
 
+        # Keep one extra state row for the same padding/sentinel convention as
+        # ReqToTokenPool row 0 and ring-buffer boundary reads.
         if online:
             assert ring_size == 1, "online compress requires ring_size=1"
             self._size = size + self.ring_size + 1
